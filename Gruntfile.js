@@ -3,7 +3,13 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      dist: {
+      src: ['public/**/*.js'],
+      dest: 'public/dist/built.js',
+      }
     },
+
+    clean: ['public/dist'],
 
     mochaTest: {
       test: {
@@ -21,15 +27,25 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      my_target: {
+        files: {
+          'public/dist/built.min.js': ['public/dist/built.js']
+        }
+      }
     },
 
     eslint: {
       target: [
-        // Add list of files to lint here
+        'public/dist/built.min.js'
       ]
     },
 
     cssmin: {
+      target: {
+        files: {
+          'public/dist/style.min.css': ['public/style.css']
+        }
+  }
     },
 
     watch: {
@@ -51,6 +67,7 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
+        command: 'mkdir test'
       }
     },
   });
@@ -63,6 +80,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-mocha-test');
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
+  grunt.loadNpmTasks('grunt-contrib-clean');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
