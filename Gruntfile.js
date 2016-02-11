@@ -67,7 +67,6 @@ module.exports = function(grunt) {
 
     shell: {
       prodServer: {
-        command: 'mkdir test'
       }
     },
   });
@@ -108,10 +107,11 @@ module.exports = function(grunt) {
   ////////////////////////////////////////////////////
 
   grunt.registerTask('test', [
+    'eslint',
     'mochaTest'
   ]);
 
-  grunt.registerTask('build', [
+  grunt.registerTask('build', ['clean', 'concat', 'uglify', 'cssmin', 'test'
   ]);
 
   grunt.registerTask('upload', function(n) {
