@@ -4,7 +4,7 @@ module.exports = function(grunt) {
     pkg: grunt.file.readJSON('package.json'),
     concat: {
       dist: {
-      src: ['public/**/*.js'],
+      src: ['public/client/*.js'],
       dest: 'public/dist/built.js',
       }
     },
