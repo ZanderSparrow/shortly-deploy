@@ -65,10 +65,11 @@ module.exports = function(grunt) {
       }
     },
 
-    shell: {
-      prodServer: {
-      }
-    },
+    exec: {
+      addChanges: 'git add .',
+      commit: 'git commit -m "new version"',
+      push: 'git push live3 master'
+    }
   });
 
   grunt.loadNpmTasks('grunt-contrib-uglify');
@@ -80,6 +81,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-shell');
   grunt.loadNpmTasks('grunt-nodemon');
   grunt.loadNpmTasks('grunt-contrib-clean');
+  grunt.loadNpmTasks('grunt-exec');
 
   grunt.registerTask('server-dev', function (target) {
     // Running nodejs in a different process and displaying output on the main console
@@ -117,13 +119,14 @@ module.exports = function(grunt) {
   grunt.registerTask('upload', function(n) {
     if (grunt.option('prod')) {
       // add your production server task here
+
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
   });
 
   grunt.registerTask('deploy', [
-    // add your deploy tasks here
+    'build'
   ]);
 
 
