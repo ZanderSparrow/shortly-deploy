@@ -7,7 +7,6 @@ window.Shortly = Backbone.View.extend({
   },
 
   initialize: function() {
-    console.log( 'Shortly is running' );
     $('body').append(this.render().el);
 
     this.router = new Shortly.Router({ el: this.$el.find('#container') });
@@ -47,7 +46,6 @@ Shortly.createLinkView = Backbone.View.extend({
   events: {
     'submit': 'shortenUrl'
   },
-
   render: function() {
     this.$el.html( this.template() );
     return this;
@@ -106,7 +104,6 @@ Shortly.LinkView = Backbone.View.extend({
 
   render: function() {
     this.$el.html(this.template(this.model.attributes));
-    console.log(this.model);
     return this;
   }
 });
